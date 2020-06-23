@@ -418,7 +418,7 @@ that memory in a location the kernel can read from.  The bios call is defined in
 `bootblock/e820.S`
 
 ```asm
-# The desetination adder (where the data will be stored) is passed in eax
+# The desetination adder (where the data will be stored) is passed in ax
 # Makes the e820 bios call.  The result of the call will be stored in the
 # address passed in ax (note only 16-bits available).
 #
@@ -467,7 +467,9 @@ completing this exercise
 
 As with all labs in this course, the lab has an associated autograder.  The
 policies and rules of the autograder may be found on the class
-[syllabus](TODO-syllabus).  You will submit your code to the auto-grader for
+[syllabus](https://gatech.instructure.com/courses/140830/assignments/syllabus) and the
+[autograder page](https://github.gatech.edu/cs3210-fall20/xv6-public/blob/main/instructions/autograder_instructions.md).
+You will submit your code to the auto-grader for
 auto-grading.  There will also be a hand graded portion of this lab, worth 15%
 of your lab grade.  Finally, this is our only *individual* lab, you cannot
 collaborate or share code with others (although discussion is allowed).  Your
