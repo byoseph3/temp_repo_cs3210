@@ -417,7 +417,7 @@ that memory in a location the kernel can read from.  The bios call is defined in
 # +0 : a 4-byte size field, containing the number of e820 records found
 # +4 : an array of e820 records.
 #
-# E820 records are 32 bytes in size, and have the following format:
+# E820 records are 24 bytes in size, and have the following format:
 # +0 : an 8-byte physical_address field
 # +8 : an 8-byte length field
 # +16 : a 4-byte type field
