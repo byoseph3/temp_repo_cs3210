@@ -10,9 +10,6 @@ The lab is composed of three parts:
  - Third, you will get familiar with the boot procedure of xv6 by modifying the
    kernel to support variable memory sizes.
 
- - **UNSURE IF I'LL ADD THIS** Fourth, you will add a system-call to the xv6 kernel to let the user query
-   the available memory.
-
 
 ## Part 1 - checking out the repository
 
@@ -55,7 +52,7 @@ make
 **NOTE: The above code uses a "Debug" build. This disables optimizations and
 adds in debug symbols.  Its much easier to work with than a "Release" build, the
 default CMAKE_BUILD_TYPE.  The autograder (more later) will run your code in
-Release mode**
+"Release" mode**
 
 
 Once you've built xv6, you may launch your new kernel.  We've provided a
@@ -104,12 +101,6 @@ support.  That will get you experience with the xv6 bootup, a little familiarity
 with system-call like behavior, and some assembly experience.  We'll cover that
 more in Part 3.
 
-**MAY BE REMOVED **
-In the fourth and final part of the lab, you're going to get a touch of
-experience writing a user system-call.  This will allow you to query the
-available and total physical memory in xv6.  This will help you get familiarized
-with the system-call infrastructure of xv6, and system call support in general.
-**END MAY BE REMOVED **
 
 ### The Specification
 
@@ -134,7 +125,7 @@ Backtrace:
 ```
 **NOTE: there are three space characters (' ') preceeding each of the address lines.
 
-You must create a header `backtrace.h` with the declaration of the `backtrace()`
+You must create a header `backtrace.h` (located in `kernel/include/`) with the declaration of the `backtrace()`
 function (but not definition, definitons generally belong in c files), such that
 any kernel file including `backtrace.h` may run the `backtrace()` function.
 
@@ -426,11 +417,11 @@ that memory in a location the kernel can read from.  The bios call is defined in
 # +0 : a 4-byte size field, containing the number of e820 records found
 # +4 : an array of e820 records.
 #
-# E820 records are 32 bytes in size, and have the following format:
+# E820 records are 24 bytes in size, and have the following format:
 # +0 : an 8-byte physical_address field
 # +8 : an 8-byte length field
 # +16 : a 4-byte type field
-# +24 : a 4 byte apic3 field (unused)
+# +20 : a 4 byte apic3 field (unused)
 #
 # The physical_address field contains the physical address of the RAM block
 # The length field contains the number of bytes in this RAM block
@@ -478,7 +469,8 @@ code from the internet will be harshly punished.
 
 To submit to the autograder, first push your code into your class repository.
 Your code must be pushed to the `lab1` branch.  Then, visit the autograder's web
-interface [here](https://dominion.cc.gt.atl.ga.us/).  Authenticate with github,
+interface [here](https://cs3210-autograder.cc.gatech.edu) (Note, you'll have to be
+on the gatech network -- e.g. through vpn -- to access the autograder site).  Authenticate with github,
 then submit your lab1 code for grading.  The lab1 code will be automatically
 pulled from github, and graded by the autograder.  You should see interactive
 feedback on the website, as well as receive an email once the grading is
@@ -490,3 +482,11 @@ considered a violation of academic integrity, and will be punished.  The
 autograder logs all submissions both locally and remotely, so any submission may
 be audited.
 
+
+## Extra
+
+If you're begging for more after this assignment, you may consider trying some
+of the following projects (no credit given, just fun experiments):
+-  Explore what it takes to get the xv6 kernel to boot with a commodity bootloader (e.g. Grub), why is this hard?
+-  Can the xv6 bootblock be made to work with an EFI (instead of BIOS) based bootloader?  What does that take?
+-  Can you get xv6 to use (not just recognize) arbitrarily large amounts of physical memory? (up to 4GB)  This is very challenging, but also very interesting!  (Its also highly related to lab 2)  (Even harder, you can use over 4GB of physical memory with PAE)
