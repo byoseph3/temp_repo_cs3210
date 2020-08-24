@@ -259,6 +259,25 @@ You are *not* allowed to change the supplied `kernel/src/lab2_ag.c`,
   page of the first process created by the kernel (in `kernel/src/inituvm.c`),
   or for any kernel data-pages (e.g. va > KERNBASE).
 
+# Test Case
+
+As this lab is very complex, and its often hard to get a baseline working
+solution, we've given you a single testcase found in the `ag_test` directory.
+The directory contains:
+-  forktest-xv6-qemu -- the script to run the test.  It has an additional option
+   `--serial=<output_file>` in case you want to write the xv6 output to disk
+-  forktest.c -- the c test file.  This is for reference, you don't have to
+   build it (a fs image that your kernel can use is provided)
+-  forktest.asm -- the .asm file for the compiled version of forktest.c
+-  init.asm -- the .asm file for the `init` process on the filesystem
+-  forktest\_fs.img -- the filesystem image that forktest-xv6-qemu will run.
+-  forktest\_expected.out -- the expected output of a correct project when
+   running forktest.img
+
+You may run this test after make using `./forktest-xv6-qemu` and compare your
+output with that of `ag_test/forktest_expected.out`.  If they match, you're
+_very_ likely to pass at least one autograder testcase ;) .
+
 # Submission
 
 As usual, you will submit your project to the [autograder](TODO-AutograderLink), and 
