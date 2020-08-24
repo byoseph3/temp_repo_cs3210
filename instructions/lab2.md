@@ -275,8 +275,10 @@ The directory contains:
    running forktest.img
 
 You may run this test after make using `./forktest-xv6-qemu` and compare your
-output with that of `ag_test/forktest_expected.out`.  If they match, you're
+output after the !!TESTSTART!! line with that of `ag_test/forktest_expected.out`.  If they match, you're
 _very_ likely to pass at least one autograder testcase ;) .
+
+(NOTE: The autograder only checks for output after the !TESTSTART! line to allow for deviations in initialization, if your code deviates before that line it is not necessarily an error).
 
 # Submission
 
