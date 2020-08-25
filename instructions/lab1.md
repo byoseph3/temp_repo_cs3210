@@ -49,7 +49,13 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug
 make
 ```
 
-**NOTE: The above code uses a "Debug" build. This disables optimizations and
+**NOTE: You may have to install gcc multilib support to get lab1 to build:**
+```
+sudo apt install gcc-multilib
+```
+
+
+**NOTE2: The above code uses a "Debug" build. This disables optimizations and
 adds in debug symbols.  Its much easier to work with than a "Release" build, the
 default CMAKE_BUILD_TYPE.  The autograder (more later) will run your code in
 "Release" mode**
