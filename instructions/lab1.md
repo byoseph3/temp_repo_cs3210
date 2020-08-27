@@ -451,10 +451,12 @@ For the purpose of this lab, we're going to assume the call behaves well
 
 Once you have the memory passed to the kernel, your job within the kernel is
 make it aware of the amount and location of physical memory, and to enable the
-kernel to use that physical memory from its `kalloc` function.  After you have
+kernel to use that physical memory from its `kalloc` function.  For simplicity,
+we will only require you to change how the kernel handles extended memory
+(ram available at physical addresses above the BIOs).  After you have
 completed this lab the kernel should be able to allocate all non-statically
-allocated physical pages from the `kalloc` function, and `kalloc` should never
-return a physical page that isn't present on the system.
+allocated physical pages present in extended memory from the `kalloc` function,
+and `kalloc` should never return a physical page that isn't present on the system.
 
 We encourage you to familiarize yourself with the kernel's `kinit` functions,
 and physical memory allocation functions, as they will likely be useful in
