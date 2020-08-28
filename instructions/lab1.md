@@ -60,6 +60,21 @@ adds in debug symbols.  Its much easier to work with than a "Release" build, the
 default CMAKE_BUILD_TYPE.  The autograder (more later) will run your code in
 "Release" mode**
 
+**NOTE3: There is a bug in `tools/mkfs.c` of the repository (refer to @119 on
+Piazza). In order to fix, implement the changes below.**
+
+In the file `tools/mkfs.c` on line 156:
+
+```c
+strncpy(de.name, argv[i], DIRSIZ);
+```
+
+should be:
+
+```c
+strncpy(de.name, argv[i], DIRSIZ-1);
+```
+
 
 Once you've built xv6, you may launch your new kernel.  We've provided a
 convenience script to help you launch it:
@@ -129,7 +144,7 @@ Backtrace:
    ...
    <0xaddressN> [last_function_in_stack]+offsN
 ```
-**NOTE: there are three space characters (' ') preceeding each of the address lines.
+**NOTE: there are three space characters (' ') preceeding each of the address lines.**
 
 You must create a header `backtrace.h` (located in `kernel/include/`) with the declaration of the `backtrace()`
 function (but not definition, definitons generally belong in c files), such that
@@ -322,7 +337,7 @@ relevant for this course (if you're really interested, you can look at xv6's
 handshake the bios makes with the actual kernel.
 
 When the bios finishes running, it loads a single disk block (the first block on
-disk) into the address 0x7e00, then jumps to and begins executing the code at
+disk) into the address 0x7c00, then jumps to and begins executing the code at
 that location.  This is how control is passed from the BIOS to the kernel.
 However, the kernel doesn't fit on a single block in disk, so we have to provide
 one more boot layer to help load the kernel.  This layer is aptly called the
