@@ -162,7 +162,7 @@ order from left to right):
 -  a single space
 -  The name of the function on the callstack
 -  A single `+` character
--  A decimal number representing the offset from the start of that funciton in bytes
+-  A decimal number representing the offset from the start of that function in bytes
 -  A newline character
 
 
@@ -197,7 +197,7 @@ operations:
 -  The `ret` instruction pops the top of the stack and jumps to that address (basically undoing a call)
 -  The base-pointer register (`bp` or `ebp` in 32-bit mode) points to the beginning of the stack frame for this function
 -  The stack pointer points to the last pushed value (e.g. `push` decrements the stack pointer, then writes to the location pointed by it, and `pop` dereferences `esp`, then increments)
--  By convention, when a funciton is first called, the base-pointer is written to the stack, and stack-pointer is transferred into the base-pointer.
+-  By convention, when a function is first called, the base-pointer is written to the stack, and stack-pointer is transferred into the base-pointer.
 
 This forces the stack layout to appear as follows:
 
@@ -269,7 +269,7 @@ of kernel boot?
 
 Instead, the kernel has information embedded in its address space giving us some
 information about the running symbols (e.g. the names of the functions that are
-running, and the mapping from address to funciton name), we just need to parse
+running, and the mapping from address to function name), we just need to parse
 this information out of the address space.
 
 ##### STAB information
