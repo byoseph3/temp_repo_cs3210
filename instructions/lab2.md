@@ -178,6 +178,10 @@ following design principals you're expected to follow:
 
 # Specification details
 
+- If the user-space code ever does a load or store of invalid memory (memory
+  it doesn't have logical read or right privledges for) the kernel should kill
+  the process.
+
 - You are expected to minimize the costs of operations.  Operations costs
   include page-faults (100s of cycles) and copies (1000s-10000s of cycles).  You
   should always prefer an additional page-fault to an unneeded copy.
@@ -194,6 +198,9 @@ following design principals you're expected to follow:
 -  In `trap.c` kernel preemptive scheduling has been disabled, this is to enable
    reliable auto-grading.  For this lab only, do not re-enable it.  You are also
    not to change the kernel's default round-robin scheduler (for this lab only).
+   
+-  Your kernel should not add any additional prints besides those specified, or
+   those implicitly added by calling required functions (e.g. `lab2_pgzero`, etc).
 
 # General advice and hints
 
