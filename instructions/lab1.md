@@ -60,22 +60,6 @@ adds in debug symbols.  Its much easier to work with than a "Release" build, the
 default CMAKE_BUILD_TYPE.  The autograder (more later) will run your code in
 "Release" mode**
 
-**NOTE3: There is a bug in `tools/mkfs.c` of the repository (refer to @119 on
-Piazza). In order to fix, implement the changes below.**
-
-In the file `tools/mkfs.c` on line 156:
-
-```c
-strncpy(de.name, argv[i], DIRSIZ);
-```
-
-should be:
-
-```c
-strncpy(de.name, argv[i], DIRSIZ-1);
-```
-
-
 Once you've built xv6, you may launch your new kernel.  We've provided a
 convenience script to help you launch it:
 
