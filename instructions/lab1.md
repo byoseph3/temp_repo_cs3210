@@ -142,7 +142,7 @@ will read `Backtrace:`.
 Each of the following N lines will have the following information and format (in
 order from left to right):
 -  three (3) spaces to start the line
--  The address of the next instruction to run in the stack, printed in lower-case hex, surrounded on the left by a single `<` and on the right by a single `>`
+-  The address of the next instruction to run in the stack, printed in lower-case hex, prefixed by "0x", surrounded on the left by a single `<` and on the right by a single `>`
 -  a single space
 -  The name of the function on the callstack
 -  A single `+` character
