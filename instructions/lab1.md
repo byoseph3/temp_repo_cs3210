@@ -279,7 +279,7 @@ int stab_info(uint eip, struct stab_info *info);
 
 Sometimes (in the instance of compiler optimizations or assembly functions) the 
 `stab_info` function cannot find a symbol for a valid return address, in this instance
-your backtrace function should print the function name as <unknown> with an offset of 0.
+your backtrace function should print the function name as `<unknown>` with an offset of 0.
 
 ## Part 3 - Modifying boot.
 
