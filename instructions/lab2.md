@@ -278,12 +278,16 @@ The directory contains:
 -  forktest.asm -- the .asm file for the compiled version of forktest.c
 -  init.asm -- the .asm file for the `init` process on the filesystem
 -  forktest\_fs.img -- the filesystem image that forktest-xv6-qemu will run.
--  forktest\_expected.out -- the expected output of a correct project when
-   running forktest.img
+-  forktest_expected_cow.out -- the expected output of a project with working 
+   copy-on-write functionality but no shared zero-initialized page when running forktest.img
+-  forktest\_expected_complete.out -- the expected output of a correct, 
+   finshed project when running forktest.img
 
 You may run this test after make using `./forktest-xv6-qemu` and compare your
-output after the !!TESTSTART!! line with that of `ag_test/forktest_expected.out`.  If they match, you're
-_very_ likely to pass at least one autograder testcase ;) .
+output after the !!TESTSTART!! line with that of `ag_test/forktest_expected_complete.out`.  If they match, you're
+_very_ likely to pass at least one autograder testcase ;) . To break things up, you can also compare your output 
+against `./ag_test/forktest_expected_cow.out` after you've implemented copy-on-write forking. If they match, you have 
+a good baseline that your CoW works on at least this test and can move on to part 2.
 
 (NOTE: The autograder only checks for output after the !TESTSTART! line to allow for deviations in initialization, if your code deviates before that line it is not necessarily an error).
 
