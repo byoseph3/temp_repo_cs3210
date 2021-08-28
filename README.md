@@ -137,7 +137,7 @@ stack will be at higher addresses the earlier they were pushed on.
 
 Answer the following on Canvas:
 
-1. What address is the start (first pushed element) of the stack?
+1. Assume the stack is empty. If an item was pushed onto the stack, what would the address of this element be?
 
 2. What items are on the stack at this point (pc = 0x10000c)?
 
