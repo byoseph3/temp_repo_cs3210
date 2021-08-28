@@ -23,8 +23,9 @@ can be provided through Piazza or Office Hours for getting this setup.
 Start by checking out the xv6 repository on your local machine.
 
 ```bash
-git clone git@github.gatech.edu/cs3210-fall2021/xv6.git 
+git clone git@github.gatech.edu:cs3210-fall2021/xv6.git 
 cd xv6
+git checkout lab0
 ```
 
 Next, launch the docker instance for the class using the provided script.
