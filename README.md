@@ -137,7 +137,9 @@ stack will be at higher addresses the earlier they were pushed on.
 
 Answer the following on Canvas:
 
-1. Assume the stack is empty. If an item was pushed onto the stack, what would the address of this element be?
+1. To what address is the stack initialized during the bootloading process?
+   (Another way to answer this is to ask yourself what's the bottom of the
+   stack?)
 
 2. What items are on the stack at this point (pc = 0x10000c)?
 
