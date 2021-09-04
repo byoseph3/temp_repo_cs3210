@@ -55,4 +55,3 @@ add_custom_target(
   DEPENDS buildkern buildboot xv6.img makeuserfs
   #DEPENDS buildkern buildboot xv6.img
 )
-
