@@ -135,7 +135,7 @@ stack will be at higher addresses the earlier they were pushed on.
 
 ## Graded Questions
 
-Answer the following on Canvas:
+Answer the following on Gradescope:
 
 1. To what address is the stack initialized during the bootloading process?
    (Another way to answer this is to ask yourself what's the bottom of the
