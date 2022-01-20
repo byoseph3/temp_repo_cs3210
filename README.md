@@ -491,7 +491,7 @@ completing this exercise.
 
 As with all labs in this course, the lab has an associated autograder on
 Gradescope. The policies and rules of the autograder may be found in the 
-[autograder manual](). You will submit your code to the autograder for
+[autograder manual][autograder-manual]. You will submit your code to the autograder for
 autograding. There will also be a hand graded portion of this lab, worth 15%
 of your lab grade. Finally, this is our only *individual* lab, you cannot
 collaborate or share code with others (although discussion is allowed). Your
@@ -499,7 +499,7 @@ code will be checked for cheating, and any detection of shared code, or pulling
 code from the internet will be harshly punished.
 
 To submit, run `scripts/submit.sh` and upload the generated `submission.zip`
-file to [Gradescope](gradescope).
+file to [Gradescope][gradescope].
 
 Test breakdown:
 * Tests 1-3: Part 1
