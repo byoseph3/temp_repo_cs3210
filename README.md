@@ -26,7 +26,7 @@ The xv6 repository we're using for this course is available on Georgia Tech's
 GitHub:
 
 ```bash
-git clone git@github.gatech.edu:cs3210-fall2021/xv6.git
+git clone git@github.gatech.edu:cs3210-spring2022/xv6.git
 ```
 
 For this lab, we will be using the lab1 branch within git. You may switch to it
@@ -303,7 +303,7 @@ not necessarily an error).
 
 As with all labs in this course, the lab has an associated autograder on
 Gradescope. The policies and rules of the autograder may be found on the class
-[syllabus]. You will submit your code to the autograder for autograding.
+syllabus. You will submit your code to the autograder for autograding.
 There will also be a hand graded portion of this lab, worth 15% of your lab
 grade. Finally, for this lab and all future ones, you are allowed to work on a
 team of up to two people. Your code will still be checked for cheating, and any
@@ -311,7 +311,7 @@ detection of shared code (with someone outside of your group) or pulling code
 from the internet will be harshly punished.
 
 To submit, run `scripts/submit.sh` and upload the generated `submission.zip`
-file to your Gradescope section ([A][gradescope-a], [GR][gradescope-gr]).
+file to Gradescope.
 
 **NOTE:** Any unauthorized attempt to subvert or attack the autograder will be
 considered a violation of academic integrity and will be punished. The
@@ -323,6 +323,3 @@ submission may be audited.
 [git]: https://www.git-scm.com
 [git-manual]: https://www.kernel.org/pub/software/scm/git/docs/user-manual.html
 [git-article]: https://eagain.net/articles/git-for-computer-scientists/
-[syllabus]: https://github.gatech.edu/pages/cs3210-fall2021/course/syllabus/
-[gradescope-a]: https://www.gradescope.com/courses/280787
-[gradescope-gr]: https://www.gradescope.com/courses/299636
