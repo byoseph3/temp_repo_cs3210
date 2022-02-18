@@ -506,6 +506,12 @@ considered a violation of academic integrity and will be punished. The
 autograder logs all submissions both in Gradescope and remotely, so any
 submission may be audited.
 
+## Collaboration Policy
+
+This is an individual assignment. You may not work with another student to complete the assignment.
+
+To set up a private fork, please follow [these instructions][private-fork].
+
 ## Extra
 
 If you're begging for more after this assignment, you may consider trying some
@@ -532,6 +538,7 @@ of the following projects (no credit given, just fun experiments):
 [bios]: https://github.com/qemu/qemu/tree/master/pc-bios
 [grub]: https://www.gnu.org/software/grub/
 [e820]: https://wiki.osdev.org/Detecting_Memory_(x86)#BIOS_Function:_INT_0x15.2C_EAX_.3D_0xE820
-[syllabus]: https://github.gatech.edu/pages/cs3210-fall2021/course/syllabus/
+[syllabus]: https://github.gatech.edu/pages/cs3210-spring2022/course/syllabus/
 [gradescope-a]: https://www.gradescope.com/courses/280787
 [gradescope-gr]: https://www.gradescope.com/courses/299636
+[private-fork]: https://github.gatech.edu/pages/cs3210-spring2022/course/wiki/private-fork
