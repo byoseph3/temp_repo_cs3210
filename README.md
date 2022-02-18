@@ -490,8 +490,8 @@ completing this exercise.
 ## Grading
 
 As with all labs in this course, the lab has an associated autograder on
-Gradescope. The policies and rules of the autograder may be found on the class
-[syllabus][syllabus]. You will submit your code to the autograder for
+Gradescope. The policies and rules of the autograder may be found in the 
+[autograder manual][autograder-manual]. You will submit your code to the autograder for
 autograding. There will also be a hand graded portion of this lab, worth 15%
 of your lab grade. Finally, this is our only *individual* lab, you cannot
 collaborate or share code with others (although discussion is allowed). Your
@@ -499,7 +499,11 @@ code will be checked for cheating, and any detection of shared code, or pulling
 code from the internet will be harshly punished.
 
 To submit, run `scripts/submit.sh` and upload the generated `submission.zip`
-file to your Gradescope section ([A][gradescope-a], [GR][gradescope-gr]).
+file to [Gradescope][gradescope].
+
+Test breakdown:
+* Tests 1-3: Part 1
+* Tests 4-7: Part 2
 
 **NOTE:** Any unauthorized attempt to subvert or attack the autograder will be
 considered a violation of academic integrity and will be punished. The
@@ -538,7 +542,6 @@ of the following projects (no credit given, just fun experiments):
 [bios]: https://github.com/qemu/qemu/tree/master/pc-bios
 [grub]: https://www.gnu.org/software/grub/
 [e820]: https://wiki.osdev.org/Detecting_Memory_(x86)#BIOS_Function:_INT_0x15.2C_EAX_.3D_0xE820
-[syllabus]: https://github.gatech.edu/pages/cs3210-spring2022/course/syllabus/
-[gradescope-a]: https://www.gradescope.com/courses/280787
-[gradescope-gr]: https://www.gradescope.com/courses/299636
 [private-fork]: https://github.gatech.edu/pages/cs3210-spring2022/course/wiki/private-fork
+[autograder-manual]: https://github.gatech.edu/pages/cs3210-spring2022/course/wiki/autograder/
+[gradescope]: https://www.gradescope.com/courses/349001
