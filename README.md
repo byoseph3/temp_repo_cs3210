@@ -318,8 +318,15 @@ considered a violation of academic integrity and will be punished. The
 autograder logs all submissions both in Gradescope and remotely, so any
 submission may be audited.
 
+## Collaboration Policy
+
+This is an individual assignment. You may not work with another student to complete the assignment.
+
+To set up a private fork, please follow [these instructions][private-fork].
+
 [intel manual]: https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-3a-3b-3c-and-3d-system-programming-guide.html
 [xv6 manual]: http://cs3210.cc.gatech.edu/r/xv6-rev9-book.pdf
 [git]: https://www.git-scm.com
 [git-manual]: https://www.kernel.org/pub/software/scm/git/docs/user-manual.html
 [git-article]: https://eagain.net/articles/git-for-computer-scientists/
+[private-fork] https://github.gatech.edu/pages/cs3210-spring2022/course/wiki/private-fork/
