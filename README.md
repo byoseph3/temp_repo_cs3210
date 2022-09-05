@@ -23,7 +23,7 @@ can be provided through Piazza or Office Hours for getting this setup.
 Start by checking out the xv6 repository on your local machine.
 
 ```bash
-git clone git@github.gatech.edu:cs3210-fall2021/xv6.git 
+git clone git@github.gatech.edu:cs3210/xv6.git
 cd xv6
 git checkout lab0
 ```
@@ -167,7 +167,7 @@ code.
 
 ## Extra (not graded)
 
-For thought: (let us know if you play with it!): Most modern OSs boot using a
+For thought: Most modern OSs boot using a
 firmware standard called UEFI instead of the older standard BIOS. Bootloaders
 like grub are designed to support both standards. Thus, grub should be able to
 boot xv6 on UEFI. Xv6 is not able to boot to the shell with UEFI because it has
