@@ -5,7 +5,7 @@ gained with xv6, particularly the boot process (which you'll be modifying in lab
 1), as well as to gain some familiarity with the tools we'll be using as a part
 of this course.
 
-This is the only lab where you will submit answers to questions through Canvas.
+This is the only lab where you will submit answers to questions through Gradescope.
 All other labs will be autograded.
 
 ## Requirements
