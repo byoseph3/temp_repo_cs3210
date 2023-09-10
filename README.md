@@ -252,7 +252,7 @@ in `include/asm/x86.h`:
 // Reads the current value of the register %ebp into the variable passed by
 // dest.
 // USAGE:
-// int ebp;
+// int dest;
 // read_ebp(dest);
 // -- dest now contains %ebp ---
 #define read_ebp(dest)
