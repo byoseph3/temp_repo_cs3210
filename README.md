@@ -26,7 +26,7 @@ The xv6 repository we're using for this course is available on Georgia Tech's
 GitHub:
 
 ```bash
-git clone git@github.gatech.edu:cs3210/xv6.git
+git clone git@github.gatech.edu:cs3210-fall2023/xv6.git
 ```
 
 For this lab, we will be using the lab1 branch within git. You may switch to it
@@ -329,4 +329,4 @@ To set up a private fork, please follow [these instructions][private-fork].
 [git]: https://www.git-scm.com
 [git-manual]: https://www.kernel.org/pub/software/scm/git/docs/user-manual.html
 [git-article]: https://eagain.net/articles/git-for-computer-scientists/
-[private-fork] https://github.gatech.edu/pages/cs3210-spring2022/course/wiki/private-fork/
+[private-fork]: https://github.gatech.edu/pages/cs3210-fall2023/course/wiki/private-fork/
