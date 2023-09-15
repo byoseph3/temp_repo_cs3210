@@ -320,9 +320,7 @@ submission may be audited.
 
 ## Collaboration Policy
 
-This is an individual assignment. You may not work with another student to complete the assignment.
-
-To set up a private fork, please follow [these instructions][private-fork].
+You may choose to work with a partner. When sharing code with your partner, use a private git repository. Instructions for doing this are in the TA slides uploaded to Canvas -> Files or [here][private-fork]. You will select your partner when submitting to Gradescope. Working alone is also allowed.
 
 [intel manual]: https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-3a-3b-3c-and-3d-system-programming-guide.html
 [xv6 manual]: http://cs3210.cc.gatech.edu/r/xv6-rev9-book.pdf
