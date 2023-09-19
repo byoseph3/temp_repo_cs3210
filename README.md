@@ -304,6 +304,7 @@ not necessarily an error).
 As with all labs in this course, the lab has an associated autograder on
 Gradescope. The policies and rules of the autograder may be found on the class
 syllabus. You will submit your code to the autograder for autograding.
+The submission limit is **5 submissions per day**.
 There will also be a hand graded portion of this lab, worth 15% of your lab
 grade. Finally, for this lab and all future ones, you are allowed to work on a
 team of up to two people. Your code will still be checked for cheating, and any
