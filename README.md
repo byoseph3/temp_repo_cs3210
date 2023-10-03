@@ -322,11 +322,11 @@ submission may be audited.
 ## Hand Grading
 A portion of the lab will be hand graded. This is separate from the autograder
 results. For this lab, handgrading will include but is not limited to:
-	- Ensuring mutal exclusion in newly created kernel data structures
-	  (remember, xv6 can be run on multiple CPUs, so acesses to shared 
-	  data structures must be treated as critical sections)
-	- Checking for attempts to attempts to subvert the autograder
-	- Detecting violations of student honor code
+- Ensuring mutal exclusion in newly created kernel data structures (remember,
+  xv6 can be run on multiple CPUs, so acesses to shared data structures must 
+  be treated as critical sections)
+- Checking for attempts to attempts to subvert the autograder
+- Detecting violations of student honor code
 
 ## Collaboration Policy
 
