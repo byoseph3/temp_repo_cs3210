@@ -319,6 +319,15 @@ considered a violation of academic integrity and will be punished. The
 autograder logs all submissions both in Gradescope and remotely, so any
 submission may be audited.
 
+## Hand Grading
+A portion of the lab will be hand graded. This is separate from the autograder
+results. For this lab, handgrading will include but is not limited to:
+	- Ensuring mutal exclusion in newly created kernel data structures
+	  (remember, xv6 can be run on multiple CPUs, so acesses to shared 
+	  data structures must be treated as critical sections)
+	- Checking for attempts to attempts to subvert the autograder
+	- Detecting violations of student honor code
+
 ## Collaboration Policy
 
 You may choose to work with a partner. When sharing code with your partner, use a private git repository. Instructions for doing this are in the TA slides uploaded to Canvas -> Files or [here][private-fork]. You will select your partner when submitting to Gradescope. Working alone is also allowed.
