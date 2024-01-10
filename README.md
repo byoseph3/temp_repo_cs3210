@@ -23,7 +23,7 @@ can be provided through Piazza or Office Hours for getting this setup.
 Start by checking out the xv6 repository on your local machine.
 
 ```bash
-git clone git@github.gatech.edu:cs3210-fall2023/xv6.git
+git clone git@github.gatech.edu:cs3210-spring2024/xv6.git
 cd xv6
 git checkout lab0
 ```
@@ -84,6 +84,7 @@ BIOS `ljmp` instruction from the x86 machine's reset vector:
 ljmp   $0xf000,$0xe05b
 ```
 
+(The instruction arguments may appear different due to a bug with gdb recognizing real-mode).
 This is a 16-bit real-mode instruction (an obscure mode of the x86 processor run
 at boot).  The 0xf000 is the real-mode segment, with 0xe05b the jumped to
 address.  Look up real-mode addressing, what is the linear address to which it
