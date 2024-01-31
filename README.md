@@ -26,7 +26,7 @@ The xv6 repository we're using for this course is available on Georgia Tech's
 GitHub:
 
 ```bash
-git clone git@github.gatech.edu:cs3210-fall2023/xv6.git
+git clone git@github.gatech.edu:cs3210-spring2024/xv6.git
 ```
 
 For this lab, we will be using the lab1 branch within git. You may switch to it
@@ -330,11 +330,11 @@ results. For this lab, handgrading will include but is not limited to:
 
 ## Collaboration Policy
 
-You may choose to work with a partner. When sharing code with your partner, use a private git repository. Instructions for doing this are in the TA slides uploaded to Canvas -> Files or [here][private-fork]. You will select your partner when submitting to Gradescope. Working alone is also allowed.
+You may choose to work with a partner. When sharing code with your partner, use a private git repository. Instructions for doing this are [here][private-fork]. You will select your partner after submitting to Gradescope in addition to choosing your group on canvas. Working alone is also allowed.
 
 [intel manual]: https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-3a-3b-3c-and-3d-system-programming-guide.html
 [xv6 manual]: http://cs3210.cc.gatech.edu/r/xv6-rev9-book.pdf
 [git]: https://www.git-scm.com
 [git-manual]: https://www.kernel.org/pub/software/scm/git/docs/user-manual.html
 [git-article]: https://eagain.net/articles/git-for-computer-scientists/
-[private-fork]: https://github.gatech.edu/pages/cs3210-fall2023/course/wiki/private-fork/
+[private-fork]: https://github.gatech.edu/pages/cs3210-spring2024/course/wiki/private-fork/
