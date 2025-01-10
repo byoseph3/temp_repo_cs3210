@@ -1,12 +1,9 @@
-# Lab0: Booting xv6
+# Lab0: Booting xv6 and Writing User-Space Programs
 
-The goal of this lab is to get your environment setup, and some familiarity
-gained with xv6, particularly the boot process (which you'll be modifying in lab
-1), as well as to gain some familiarity with the tools we'll be using as a part
-of this course.
-
-This is the only lab where you will submit answers to questions through Gradescope.
-All other labs will be autograded.
+The goal of this lab is to get your environment setup, and gain some familiarity
+with xv6, particularly the boot process (which you'll be modifying in lab
+1), the tools we'll be using as a part of this course as well as how to write
+user-space processes. 
 
 ## Requirements
 
@@ -23,7 +20,7 @@ can be provided through Piazza or Office Hours for getting this setup.
 Start by checking out the xv6 repository on your local machine.
 
 ```bash
-git clone https://github.gatech.edu/cs3210-spring2024/xv6.git
+git clone https://github.gatech.edu/cs3210-spring2025/xv6.git
 cd xv6
 git checkout lab0
 ```
@@ -58,18 +55,139 @@ running our xv6-qemu script (from within your build directory):
 This should launch xv6 and take you to a prompt.  You can view available files
 with `ls`.  You can close qemu by pressing CTRL-a followed by x.
 
-## Observing behaviors with gdb
+## Building User-Space Programs in xv6
+New user-space programs can be created by adding C source files in the `user` directory.
+To ensure that the CMake build system is aware of the new file, and compiles it properly,
+we need to modify the `user/Sources.cmake` file.
 
-Now, we're going to run our code with gdb.  We've attached a gdb flag to the xv6
-launcher script, please launch the xv6 launcher with gdb enabled:
+For the scope of this lab, the three mandatory questions are already added, and the optional file entries are commented.
+We just need to specify the relative path of the user-level C source file that we want to include.
+
+We've provided a template user-space program source file in the src directory, and these typically follow the traditional C program structure with the exception of slightly different header files.
+
+After creating your program, we need to rebuild the kernel from the build directory with make. The build system will automatically compile your new program along with the existing user programs (NOTE: Ensure the program is in the `Sources.cmake` file). Once the build completes, you can run `xv6-qemu` and execute your program from the shell prompt to test for correctness.
+
+For more details on the library functions and system calls available to a user-level program, refer to the `include/user.h` file.
+
+# User-Space Programs
+
+This section will refresh you C programming skills and make you familiar some of the
+commonly used system calls in low-level C programming. Each program can be implemented in around 10 lines of code so they should not take very long. Most of your time may be spent learning about the different syscalls in xv6.
+
+**Read chapter 0 of the xv6 manual. It provides an excellent overview of the xv6 operating system and describes the fundamental system calls that will be used throughout the lab.**
+
+*Note: Be cautious when using Linux maunal page (man page), the xv6 syscalls are based of their Linux conterparts, but do not have all the features implemented, so use the man pages carefully.* 
+
+## Part 1. Hello World (easy) [1 point]
+
+The obvious starting point for a user-space program is a "Hello World" application, 
+however we have put a slight twist to the common structure. 
+
+* Write a user-space program `user/src/lab0/helloworld.c` that will write the "Hello World!" string into a temporary file using the write system call and then close the file. 
+* Afterwards, the program should read the same string out of the file into a buffer and print it to the console.
+
+
+## Part 2. Fork-Exec (easy) [1 point]
+
+The fork system call is used to create new processes, known as child processes, 
+from the currently existing process known as the parent. When fork is called, the operating system will create a new process, including a new address space, new file descriptors and other associated metadata for the process. These will be originally copied over from the parent process.
+
+**We will explore fork() in greater detail for Lab2 and Lab3 so it is very important to be familiar with it.**
+
+The exec system call is used to run an executable file in the context of the already existing process. When exec is called, the process ID (pid) does not change, however the code, heap and stack are replaced with the new program to be executed. 
+
+Fork-Exec is a common primitive used in systems programming, as it provides a way of 
+spawning a new process and executing a program. This is for example how the 
+shell program (sh.c) works in xv6.
+
+* Write a user-space program `user/src/lab0/forkexec.c` that will take as input a string from the command-line arguments and output it to the console.
+* The program must use the fork-exec design pattern. Use the build-in echo command in order to display the text to the console. 
+
+```
+$ forkexec test input
+test input
+```
+
+## Part 3. Ping-Pong (easy) [1 point]
+
+Inter-process Communication (IPC), is a set of mechanisms provided by the operating system
+to allow processes to share information with each-other. There are many methods of IPC including using signals, message queues and shared memory however we will be exploring the use of pipes for this example user-space program.
+
+The pipe system call facilitates inter-process communication by creating a unidirectional
+communication channel between two processes. It allows one process to write data 
+into the pipe, while another process can read from it.
+
+* Write a user-space program `user/src/lab0/pingpong.c` that will use pipes in order to commutate data across two processes, which must be created using fork.
+* The processes should use pipes in order to share the <pid> with each-other. For simplicity, you may assume that the <pid> can fit in one byte, so only a single byte would need to be read from and written to the pipes.
+* The parent should send its <pid> to the child through the pipe and the child should print "child: received ping from <parent-pid>".
+* The child should then send its <pid> to the parent and the parent should print "parent: received pong from <child-pid>".
+* Both processes should exit and terminate correctly. 
+
+```
+$ pingpong 
+child: received ping from 8
+parent: received pong from 9
+```
+
+## Part 4. Maximum Memory Size (moderate) [1 point]
+
+The user-space programs execute in a virtual address space that is generated 
+by the operating system. In xv6, calls to malloc eventually hit a call to the 
+sbrk system call, which is intended to grow the processes virtual address space. However there is a limit to how much we can grow the address space, 
+and that is limited by the maximum amount of physical memory in the system.
+
+*Note: This is a rough approximation of the memory size, since part of the physical memory space is taken up by the kernel and memory-mapped I/O space. Also xv6 does not have a swap partition on the disk, so once physical memory runs out of pages, xv6 can not allocate any more memory. This is the limit you must hit.*
+
+
+* Write a user-space program `user/src/lab0/limits.c` that will be used to approximate the maximum size of a process. 
+* The program should keep allocating PGSIZE worth of data until it hits a limit, and this is denoted when the allocation function you use returns an error value (-1 for sbrk and 0 for malloc).
+* The program should then print out the maximum attainable memory size in the following format: "Maximum Memory Size: 0x%x".
+
+```
+$ limits 
+Maximum Memory Size: 0x00000000
+```
+
+## Extra Credit
+
+Often there are limits to the abstractions that the operating system provides. We explored an
+example of this in the previous section where we calculated the maximum memory size of a
+user-space program. For extra credit you should calculate the maximum number of processes 
+and the maximum files per directory.
+
+### Maximum Number of Files Per Directory (moderate) [1 point]
+
+Extend the `user/src/lab0/limits.c` to calculate the maximum number of files that 
+can be created in a directory in xv6. Display the result as such "Maximum Number of Files Per Directory: %d".
+
+### Maximum Number of Processes (moderate) [1 point]
+
+Extend the `user/src/lab0/limits.c` to calculate the maximum number of processes that 
+can be created in xv6. Display the result as such "Maximum Number of Processes: %d".
+
+*Note: This problem may be more challanging than it may seem at first glance. Keep in mind that there may exist other processes that are running in the background which you will need to take into account in your program. You must comment your code to explain how you have reached your final calculation.* 
+
+```
+$ limits 
+Maximum Memory Size: 0x0000
+Maximum Number of Files Per Directory: 0
+Maximum Number of Processes: 0
+```
+
+## Grading
+
+To submit, run `scripts/submit.sh` and upload the generated `submission.zip`
+file to Gradescope.
+
+## Debugging User-Space Programs
+
+Debugging xv6 requires that we launch QEMU with the necessary flags such that it is able to sustain a remote gdb session.
 
 ```bash
 ./xv6-qemu -g
 ```
 
-This should pause qemu from launching, and wait for a gdb session to attach.
-Now, we can connect to our Docker container in a separate terminal and launch
-gdb from the build directory:
+This should pause qemu from launching, and wait for a gdb session to attach. Now, we can connect to our Docker container in a separate terminal and launch gdb from the build directory.
 
 ```bash
 ./scripts/docker.sh --attach
@@ -77,32 +195,16 @@ cd /xv6/build
 gdb
 ```
 
-Once this is complete, it should take you to a gdb console, with the initial
-BIOS `ljmp` instruction from the x86 machine's reset vector:
+By default, gdb will be attached to debug the kernel, and gdb does not have any context 
+and symbols related to the user-space programs, as they are compiled separately 
+and loaded into xv6 through the file system. To get the symbols loaded into gdb 
+for the user-space file we need to use the `file` command. 
 
-```x86
-ljmp   $0xf000,$0xe05b
-```
-
-(The instruction arguments may appear different due to a bug with gdb recognizing real-mode).
-This is a 16-bit real-mode instruction (an obscure mode of the x86 processor run
-at boot).  The 0xf000 is the real-mode segment, with 0xe05b the jumped to
-address.  Look up real-mode addressing, what is the linear address to which it
-is jumping? (this question is ungraded)
-
-Find the address of \_start, the entry point of the kernel:
-
-```bash
-$ nm kernel/kernel | grep _start
-8010b50c D _binary_entryother_start
-8010b4e0 D _binary_initcode_start
-0010000c T _start
-```
-
-The kernel address is at 0010000c.
-
-Open gdb in the same directory, set a breakpoint and run to \_start as in the
-following:
+Due to the way that gdb interacts with xv6, you will be able to set a breakpoint 
+at a particular virtual address, in this case main() which is at 0x0, 
+however other programs that run will also be aliased to the same virtual address,
+since they each have their own address space. This may require you to run the continue
+a few times before you hit the correct debug point.  
 
 ```bash
 $ gdb
@@ -111,71 +213,16 @@ The target architecture is assumed to be i8086
 [f000:fff0]    0xffff0: ljmp   $0xf000,$0xe05b
 0x0000fff0 in ?? ()
 + symbol-file kernel
-(gdb) br *0x0010000c
-Breakpoint 1 at 0x10000c
-(gdb) c
+
+(gdb) file user/_helloworld
+A program is being debugged already.
+Are you sure you want to change the file? (y or n) y
+Load new symbol table from "user/_helloworld"? (y or n) y
+Reading symbols from user/_helloworld...
+
+(gdb) br main
+Breakpoint 1 at 0x0: file /xv6/user/src/lab0/helloworld.c, line 8.
+
+(gdb) continue
 Continuing.
-The target architecture is assumed to be i386
-=> 0x10000c:  mov    %cr4,%eax
-
-Thread 1 hit Breakpoint 1, 0x0010000c in ?? ()
-(gdb) 
-
-
-Look at the registers and stack:
-
-(gdb) info reg 
-... 
-(gdb) x/24x $esp 
-... 
-(gdb)
 ```
-
-The stack grows from higher addresses to lower in x86, so items pushed on the
-stack will be at higher addresses the earlier they were pushed on.
-
-## Graded Questions
-
-Answer the following on Gradescope:
-
-1. To what address is the stack initialized during the bootloading process?
-   (Another way to answer this is to ask yourself what's the bottom of the
-   stack?)
-
-2. What items are on the stack at this point (pc = 0x10000c)?
-
-To understand what is on the stack, you need to understand the boot procedure
-because at this point the kernel has not started, so anything on the stack was
-put there by the bootblock. Look at the files `bootblock/bootasm.S`,
-`bootblock/bootmain.c`, and `build/bootblock/bootblock.asm`. Can you see what
-they are putting on the stack?
-
-3. Restart qemu and gdb as above but now set a break-point at 0x7c00. This is
-the start of the boot block (`bootblock/bootasm.S`). Using the single
-instruction step (si) step through the bootblock. Where is the stack pointer
-initialized (filename, line)?
-
-4. Single-step into bootmain. Now, look at the stack using x/24x $esp. What is
-there?
-
-5. What does the initial assembly of bootmain do to the stack? (Look in
-bootblock.asm for bootmain.)
-
-6. Continue tracing. You can use breakpoints to skip over things. Look for
-where eip is set to 0x10000c. What happens to the stack as a result of that
-call? Look at the bootmain C code and compare it to the bootblock.asm assembly
-code.
-
-## Extra (not graded)
-
-For thought: Most modern OSs boot using a
-firmware standard called UEFI instead of the older standard BIOS. Bootloaders
-like grub are designed to support both standards. Thus, grub should be able to
-boot xv6 on UEFI. Xv6 is not able to boot to the shell with UEFI because it has
-significant dependencies on the BIOS firmware standard, but it is fairly
-straightforward to allow the processor to reach the kernel entry point on UEFI
-(before panicking as it tries to access the firmware.) Using grub, a UEFI
-firmware load such as OVMF, and QEMU, show using gdb that you can reach the
-kernel entry point. What did you have to change to get this working? (You may
-use the 64-bit architecture qemu for this to avoid having to compile OVMF
-32-bit.)
