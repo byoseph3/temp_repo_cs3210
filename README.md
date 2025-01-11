@@ -118,9 +118,9 @@ communication channel between two processes. It allows one process to write data
 into the pipe, while another process can read from it.
 
 * Write a user-space program `user/src/lab0/pingpong.c` that will use pipes in order to commutate data across two processes, which must be created using fork.
-* The processes should use pipes in order to share the <pid> with each-other. For simplicity, you may assume that the <pid> can fit in one byte, so only a single byte would need to be read from and written to the pipes.
-* The parent should send its <pid> to the child through the pipe and the child should print "child: received ping from <parent-pid>".
-* The child should then send its <pid> to the parent and the parent should print "parent: received pong from <child-pid>".
+* The processes should use pipes in order to share the \<pid\> with each-other. For simplicity, you may assume that the \<pid\> can fit in one byte, so only a single byte would need to be read from and written to the pipes.
+* The parent should send its \<pid\> to the child through the pipe and the child should print "child: received ping from \<parent-pid\>".
+* The child should then send its \<pid\> to the parent and the parent should print "parent: received pong from \<child-pid\>".
 * Both processes should exit and terminate correctly. 
 
 ```
