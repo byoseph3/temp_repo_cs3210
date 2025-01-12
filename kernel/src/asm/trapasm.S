@@ -15,6 +15,9 @@ alltraps:
   movw %ax, %ds
   movw %ax, %es
 
+  # LAB 1: Set sentinel value of %ebp
+  movl $0xF00, %ebp
+
   # Call trap(tf), where tf=%esp
   pushl %esp
   call trap

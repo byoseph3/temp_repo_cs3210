@@ -55,6 +55,9 @@ entry:
   orl     $(CR0_PG|CR0_WP), %eax
   movl    %eax, %cr0
 
+  # LAB 1: Set sentinel value of %ebp
+  movl    $0xF00, %ebp
+
   # Set up the stack pointer.
   movl $(stack + KSTACKSIZE), %esp
 

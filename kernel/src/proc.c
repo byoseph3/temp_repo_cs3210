@@ -113,6 +113,8 @@ found:
   p->context = (struct context*)sp;
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
+  // LAB 1: Set sentinel value of %ebp
+  p->context->ebp = 0xF00;
 
   return p;
 }

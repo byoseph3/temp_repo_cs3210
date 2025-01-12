@@ -67,6 +67,9 @@ start32:
   orl     $(CR0_PE|CR0_PG|CR0_WP), %eax
   movl    %eax, %cr0
 
+  # LAB 1: Set sentinel value of %ebp
+  movl    $0xF00, %ebp
+
   # Switch to the stack allocated by startothers()
   movl    (start-4), %esp
   # Call mpenter()
