@@ -198,15 +198,24 @@ operations:
 - By convention, when a function is first called, the base-pointer is written to
   the stack, and stack-pointer is transferred into the base-pointer.
 
+This scheme doesn't describe how to find the bottom of the stack,
+however.  In order to know when to stop walking the stack, for this
+lab, we have modified the codebase to ensure that the first function
+that executes in any kernel thread begins with `ebp` set to `0xF00`.
+
+You should **not** print out a backtrace line corresponding to the
+first function's return address, as that return address is not always
+defined.
+
 This forces the stack layout to appear as follows:
 
 ```text
 ---------------------
 |        ...        |
 ---------------------
-|  Return Address 0 |  <-  First frame on the stack [0]
+|  Return Address 0 |  <- Not defined for first frame, don't print
 ---------------------
-|  Base Pointer 0   |  <- Not defined for first frame
+|  Base Pointer 0   |  <- Hardcoded to `0xF00`
 ---------------------
 |        ...        |
 ---------------------
