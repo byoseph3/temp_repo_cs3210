@@ -152,20 +152,26 @@ Maximum Memory Size: 0x00000000
 
 Often there are limits to the abstractions that the operating system provides. We explored an
 example of this in the previous section where we calculated the maximum memory size of a
-user-space program. For extra credit you should calculate the maximum number of processes 
+user-space program. For extra credit you should calculate the maximum number of files per process
 and the maximum files per directory.
 
-### Maximum Number of Files Per Directory (moderate) [1 point]
+### Maximum Number of Files Open at Once (moderate) [1 point]
 
-Extend the `user/src/lab0/limits.c` to calculate the maximum number of files that 
-can be created in a directory in xv6. Display the result as such "Maximum Number of Files Per Directory: %d".
+Extend `user/src/lab0/limits.c` to calculate the maximum number of
+files that can be opened by a single process in xv6.  Display the
+result as "Maximum Number of Files Open at Once: %d".
+
+*Note: This problem may be more challenging than it may seem at first
+glance.  Keep in mind that, when run by the shell, your program may
+start with some files open already.  You must comment your code to
+explain how you have reached your final calculation.*
 
 ### Maximum Number of Processes (moderate) [1 point]
 
 Extend the `user/src/lab0/limits.c` to calculate the maximum number of processes that 
-can be created in xv6. Display the result as such "Maximum Number of Processes: %d".
+can be created in xv6. Display the result as "Maximum Number of Processes: %d".
 
-*Note: This problem may be more challanging than it may seem at first glance. Keep in mind that there may exist other processes that are running in the background which you will need to take into account in your program. You must comment your code to explain how you have reached your final calculation.* 
+*Note: This problem may be more challenging than it may seem at first glance. Keep in mind that there may exist other processes that are running in the background which you will need to take into account in your program. You must comment your code to explain how you have reached your final calculation.* 
 
 ```
 $ limits 
