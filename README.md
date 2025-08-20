@@ -150,16 +150,18 @@ Maximum Memory Size: 0x00000000
 
 ## Extra Credit
 
-Often there are limits to the abstractions that the operating system provides. We explored an
-example of this in the previous section where we calculated the maximum memory size of a
-user-space program. For extra credit you should calculate the maximum number of files per process
-and the maximum files per directory.
+Often there are limits to the abstractions that the operating system
+provides. We explored an example of this in the previous section where
+we calculated the maximum memory size of a user-space program. For
+extra credit you should calculate the maximum number of files that can
+be opened at once by a single process and the maximum files per
+directory.
 
 ### Maximum Number of Files Open at Once (moderate) [1 point]
 
 Extend `user/src/lab0/limits.c` to calculate the maximum number of
-files that can be opened by a single process in xv6.  Display the
-result as "Maximum Number of Files Open at Once: %d".
+files that can be opened at once by a single process in xv6.  Display
+the result as "Maximum Number of Files Open at Once: %d".
 
 *Note: This problem may be more challenging than it may seem at first
 glance.  Keep in mind that, when run by the shell, your program may
