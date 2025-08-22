@@ -290,12 +290,12 @@ sys_open(void)
   struct file *f;
   struct inode *ip;
 
-  if(argstr(0, &path) < 0 || argint(1, &omode) < 0)
+  if(argstr(0, &path) < 0 || argint(1, &omode) < 0) // args either don't exist or can't be found.
     return -1;
 
   begin_op();
 
-  if(omode & O_CREATE){
+  if(omode & O_CREATE){ // If O_CREATE is included
     ip = create(path, T_FILE, 0, 0);
     if(ip == 0){
       end_op();
