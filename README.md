@@ -20,7 +20,7 @@ can be provided through Piazza or Office Hours for getting this setup.
 Start by checking out the xv6 repository on your local machine.
 
 ```bash
-git clone https://github.gatech.edu/cs3210-spring2025/xv6.git
+git clone https://github.gatech.edu/cs3210-fall2025/xv6.git
 cd xv6
 git checkout lab0
 ```
