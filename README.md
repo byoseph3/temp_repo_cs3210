@@ -74,6 +74,8 @@ For more details on the library functions and system calls available to a user-l
 This section will refresh you C programming skills and make you familiar some of the
 commonly used system calls in low-level C programming. Each program can be implemented in around 10 lines of code so they should not take very long. Most of your time may be spent learning about the different syscalls in xv6.
 
+**IMPORTANT:** We will be explicitly requiring error handling in your code when handgrading. For any system calls/library functions that you utilize in your code, we are making it a requirement that you must gracefully handle any errors in the event these functions return any errors.
+
 **Read chapter 0 of the xv6 manual. It provides an excellent overview of the xv6 operating system and describes the fundamental system calls that will be used throughout the lab.**
 
 *Note: Be cautious when using Linux maunal page (man page), the xv6 syscalls are based of their Linux conterparts, but do not have all the features implemented, so use the man pages carefully.* 
