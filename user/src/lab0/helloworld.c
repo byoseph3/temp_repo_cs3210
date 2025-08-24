@@ -9,10 +9,6 @@ main(int argc, char *argv[])
   // Student code goes here
   char buf[13]; // Just enough to read "Hello World!\n"
   int fd_tmp; // for the temporary file descriptor
-  char *rm_argv[2]; // to execute the command that will delete the temp file
-  rm_argv[0] = "rm";
-  rm_argv[1] = "tmp.txt";
-  //int err;
 
   /*if (fork() == 0) {
     fd_tmp = open("tmp.txt", O_CREATE|O_WRONLY);  // make is complaining that the correct flag is O_CREATE
@@ -36,7 +32,7 @@ main(int argc, char *argv[])
   fd_tmp=open("tmp.txt", O_RDONLY);
   read(fd_tmp, buf, 13);
   write(1, buf, 13); // display 13 bytes.
+  unlink("tmp.txt");
   close(fd_tmp);
-  exec("/rm", rm_argv);
   exit();
 }
