@@ -58,9 +58,11 @@ main(int argc, char *argv[])
 
   // Calculation is as follows:
   // Number of files that can be opened as is: 14
-  // 
-  int file_counter = 1;
+  // File descriptors 0, 1, and 2 are taken by default, hence 3 more files are opened.
+  // 14 + 3 = 17.
+
   int fd = open("file", O_CREATE);
+  int file_counter = 4; // 4 counting file descriptors 0, 1, and 2. Also includes the file that was just created.
   int lowest_fd = fd;
 
   do {
