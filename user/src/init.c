@@ -27,7 +27,7 @@ main(void)
       exit();
     }
     if(pid == 0){
-      exec("sh", argv);
+      exec("sh", argv); // init + sh = 2 processes!
       printf(1, "init: exec sh failed\n");
       exit();
     }
