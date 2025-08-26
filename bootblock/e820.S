@@ -53,11 +53,11 @@ do_e820:
 
   cmp %edx, %eax
   jne .e820f
+  jcxz .skipent
+  inc %bp
   test %ebx, %ebx
   je .e820f
-  jcxz .skipent
   cmp $20, %cl
-  inc %bp		
   add $24, %di
 .skipent:
   test %ebx, %ebx
