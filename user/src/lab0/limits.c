@@ -6,29 +6,19 @@
 #define PGSIZE 4096  // 4K Page size
 
 void
-err_checker_helper(int err, char* msg)
-{
-  if (err != -1)
-    return;
-  
-  printf(2, msg);
-  return;
-}
-
-void
 h_maxForkFinder(int i)
 {
   int fork_num = fork();
   if (fork_num == -1) {
-    // base case
+    // base case (requires an error, so error is handled by default)
     printf(1, "Maximum Number of Processes: %d\n", i);
-    exit();
+    exit(); // clean up
   } else if (fork_num == 0) {
     h_maxForkFinder(i+1);
-    wait();
+    wait(); // clean up
     exit();
   }
-  wait();
+  wait(); // make sure that this current process doesn't exit!
 }
 
 
@@ -43,38 +33,46 @@ main(int argc, char *argv[])
   // as long as the number of non-fork processes are counted and used as the parameter,
   // the output should be correct.
 
+  // =====================================================
   // Calculation is as follows:
   // forks that can be open: 61
   // limits.c creates a process: 1
   // init.c also execs sh.c: 2
   // 2 + 1 = 3
   // 3 + 61 = 64
+  // =====================================================
 
   h_maxForkFinder(3); // 1 includes the current process.
 
   // maximum files
-  // need to figure out how to tell when I'm out of file memory
-  // need to figure out how to delete all files.
+  // need to figure out how to tell when I'm out of room in fd table.
 
+  // =====================================================
   // Calculation is as follows:
-  // Number of files that can be opened as is: 14
+  // Number of files that can be opened as is: 13
   // File descriptors 0, 1, and 2 are taken by default, hence 3 more files are opened.
-  // 14 + 3 = 17.
+  // 13 + 3 = 16.
+  // Possible edge case is that the first file can't be created.
+  // =====================================================
 
-  int fd = open("file", O_CREATE);
-  int file_counter = 4; // 4 counting file descriptors 0, 1, and 2. Also includes the file that was just created.
-  int lowest_fd = fd;
-
-  do {
+  // plan: since stdin, stdout, stderr count as files, keep opening files until maximum number is reached, then add 1 to account for stdin being 0.
+  int fd;
+  int min_fd = -1; // This is here for cleaning up after this limit test.
+  int max_fd = -2; // This is to store the max file descriptor when fd becomes -1.
+  while(fd != -1) {
     fd = open("file", O_CREATE);
-    file_counter++;
-  } while (fd != -1);
-
-  for (int i = lowest_fd; i < fd; i++) {
-    close(fd); // optional?
-    unlink("file");
+    if (min_fd == -1) // Error handling is implicit due to final condition.
+      min_fd = fd; // assign the lowest fd
+    if (fd > max_fd)
+      max_fd = fd; // Set max_fd
   }
-  printf(1, "Maximum Number of Files Per Directory: %d\n", file_counter);
+
+  printf(1, "Maximum Number of Files Per Directory: %d\n", max_fd + 1); // adding 1 to account for stdin having fd 0.
+
+  for (int i = min_fd; i < fd; i++) {
+    close(fd); // optional?
+    unlink("file"); // clean up!
+  }
 
   // Student code goes here
   int pages = 0;
@@ -82,13 +80,13 @@ main(int argc, char *argv[])
   int mallocFlag = 0;
   if (!mallocFlag) {
     while (sbrk(PGSIZE) != (void *) -1) { // had to cast this because make wsa complaining.
-      pages++;
+      pages++; // Error is being handled implicitly as it is the ending condition.
     }
+    sbrk(-pages * PGSIZE); // clean up!
   } else {
     while (malloc(PGSIZE) != 0) { // had to cast this because make wsa complaining.
       pages++;
     }
-    //sbrk(-pages * PGSIZE);
   }
   
   printf(1, "Maximum Memory Size: 0x%x\n", pages * PGSIZE);

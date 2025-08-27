@@ -35,7 +35,6 @@ main(int argc, char *argv[])
   if (!child_checker) {
     // child code
     pid = getpid();
-    printf(1, "Child pid: %d\n", pid); // for debugging
 
     err = close(p_ptoc[1]); // close off input segment of the parent to child pipe.
     err_checker_helper(err, "Error when closing off input segment of pipe 1.\n");
@@ -55,7 +54,6 @@ main(int argc, char *argv[])
   }
   // parent code
   pid = getpid();
-  printf(1, "Parent pid: %d\n", pid); // for debugging
 
   err = close(p_ptoc[0]); // close off output segment of the parent to child pipe.
   err_checker_helper(err, "Error when closing off output segment of pipe 1.\n");
