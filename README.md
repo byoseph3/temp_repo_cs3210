@@ -156,8 +156,7 @@ Often there are limits to the abstractions that the operating system
 provides. We explored an example of this in the previous section where
 we calculated the maximum memory size of a user-space program. For
 extra credit you should calculate the maximum number of files that can
-be opened at once by a single process and the maximum files per
-directory.
+be opened at once by a single process and the maximum number of processes at once.
 
 ### Maximum Number of Files Open at Once (moderate) [1 point]
 
@@ -173,14 +172,14 @@ explain how you have reached your final calculation.*
 ### Maximum Number of Processes (moderate) [1 point]
 
 Extend the `user/src/lab0/limits.c` to calculate the maximum number of processes that 
-can be created in xv6. Display the result as "Maximum Number of Processes: %d".
+can be created in xv6 at once. Display the result as "Maximum Number of Processes: %d".
 
 *Note: This problem may be more challenging than it may seem at first glance. Keep in mind that there may exist other processes that are running in the background which you will need to take into account in your program. You must comment your code to explain how you have reached your final calculation.* 
 
 ```
 $ limits 
 Maximum Memory Size: 0x0000
-Maximum Number of Files Per Directory: 0
+Maximum Number of Files Open at Once: 0
 Maximum Number of Processes: 0
 ```
 
