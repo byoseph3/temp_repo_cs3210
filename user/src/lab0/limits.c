@@ -67,7 +67,7 @@ main(int argc, char *argv[])
       max_fd = fd; // Set max_fd
   }
 
-  printf(1, "Maximum Number of Files Per Directory: %d\n", max_fd + 1); // adding 1 to account for stdin having fd 0.
+  printf(1, "Maximum Number of Files Open at Once: %d\n", max_fd + 1); // adding 1 to account for stdin having fd 0.
 
   for (int i = min_fd; i < fd; i++) {
     close(fd); // optional?
