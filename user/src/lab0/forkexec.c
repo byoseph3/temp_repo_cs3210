@@ -19,18 +19,17 @@ int
 main(int argc, char *argv[])
 {
   // Student code goes here
-  //int err = 0;
+  int err = 0;
 
   if (fork() == 0) {
-    //printf(1, "gate 1");
 
     // 8 arguments is the max!
-    exec("/echo", argv); // shortcut?
-    //printf(1, "gate 2");
-    //err_checker_helper(err, "Error while child process is running echo\n");
+    err = exec("/echo", argv); // shortcut?
+    err_checker_helper(err, "Error while child process is running echo\n");
 
     exit(); // Good practice according to TAs.
   }
-  wait(); // Prevent any zombies
+  err = wait(); // Prevent any zombies
+  err_checker_helper(err, "Wait failed. No child processes detected.");
   exit();
 }
