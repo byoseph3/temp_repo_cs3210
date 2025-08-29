@@ -14,6 +14,13 @@ sys_fork(void)
 }
 
 int
+sys_backtrace(void) {
+  int ebp;
+  read_ebp(ebp);
+  return ebp;
+}
+
+int
 sys_exit(void)
 {
   exit();
