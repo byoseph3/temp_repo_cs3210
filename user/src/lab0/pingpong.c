@@ -70,6 +70,7 @@ main(int argc, char *argv[])
 
   printf(1, "parent: received pong from %d\n", *buf);
 
-  wait(); // no zombies
+  err = wait(); // no zombies
+  err_checker_helper(err, "Wait failed. No child processes detected.");
   exit();
 }
