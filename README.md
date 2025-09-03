@@ -538,7 +538,7 @@ of the following projects (no credit given, just fun experiments):
 [cmake]: https://cmake.org/
 [cmake-manual]: https://cmake.org/cmake/help/v3.21/
 [backtrace]: https://sourceware.org/gdb/onlinedocs/gdb/Backtrace.html
-[stack-article]: https://signalshore.github.io/blog/2020-09-20-Stack-Frames-in-x86.html
+[stack-article]: https://web.archive.org/web/20250903122051/https://signalshore.net/stack-frames-in-x86/
 [stab]: https://sourceware.org/gdb/current/onlinedocs/stabs.html/Overview.html
 [linker]: https://sourceware.org/binutils/docs/ld/Scripts.html
 [bios]: https://github.com/qemu/qemu/tree/master/pc-bios
