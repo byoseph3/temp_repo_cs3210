@@ -1,4 +1,3 @@
-#include "asm/x86.h"
 #include "types.h"
 #include "defs.h"
 #include "date.h"
@@ -6,6 +5,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "backtrace.h"
 
 int
 sys_fork(void)
@@ -15,9 +15,8 @@ sys_fork(void)
 
 int
 sys_backtrace(void) {
-  int ebp;
-  read_ebp(ebp);
-  return ebp;
+  backtrace();
+  return 0;
 }
 
 int

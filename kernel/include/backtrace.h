@@ -1,1 +1,1 @@
-void backtrace();
+int backtrace();

@@ -164,6 +164,14 @@ struct gatedesc {
   uint off_31_16 : 16;  // high bits of offset in segment
 };
 
+// e820 struct to extract e820 record data
+typedef struct e820_record {
+  unsigned long long phys_addr;
+  unsigned long long frame_length;
+  uint type_field;
+  uint apic3;
+} e820_record;
+
 // Set up a normal interrupt/trap gate descriptor.
 // - istrap: 1 for a trap (= exception) gate, 0 for an interrupt gate.
 //   interrupt gate clears FL_IF, trap gate leaves FL_IF alone

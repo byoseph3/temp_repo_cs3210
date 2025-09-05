@@ -10,7 +10,6 @@ e820:
 dest_addr:
   .word 0x0
 
-
 # The desetination adder (where the data will be stored) is passed in eax
 # Makes the e820 bios call.  The result of the call will be stored in the
 # address passed in ax (note only 16-bits available).
@@ -35,13 +34,13 @@ dest_addr:
 #   5 - bad memory
 #   -- for the purpose of this lab, we only care about type 1 memory
 .globl do_e820
-do_e820:
-  mov %ax, (dest_addr)
-  add $4, %ax
-  mov %ax, %di
-  xor %ebx, %ebx
-  xor %bp, %bp
-  mov (magic), %edx
+do_e820: # 0x7c8c
+  mov %ax, (dest_addr) # This changes dest_addr to what eax is
+  add $4, %ax # Increment di
+  mov %ax, %di # Sets di to destination
+  xor %ebx, %ebx # Clears ebx
+  xor %bp, %bp # Clears bp
+  mov (magic), %edx # Sets edx to magic number
 
 .e820lp:
   mov (e820), %eax
@@ -63,8 +62,8 @@ do_e820:
   test %ebx, %ebx
   jne .e820lp
 .e820f:
-  xor %eax, %eax
-  mov (dest_addr), %ax
-  mov %bp, (%eax)
-  ret
+  xor %eax, %eax # clears eax (is this relevant?)
+  mov (dest_addr), %ax # AX gets set to dest_addr
+  mov %bp, (%eax) # Whats up with this?
+  ret # Return from dest_addr
 

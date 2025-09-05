@@ -36,6 +36,11 @@ seta20.2:
   movb    $0xdf,%al               # 0xdf -> port 0x60
   outb    %al,$0x60
 
+  # Get Total Memory Here
+  # 0x7c1d is the point in memory for line 49. (loop hits this breakpoint over and over again)
+  movl $0x8000, %eax # This address might be safe?
+  call do_e820
+
   # Switch from real to protected mode.  Use a bootstrap GDT that makes
   # virtual addresses map directly to physical addresses so that the
   # effective memory map doesn't change during the transition.

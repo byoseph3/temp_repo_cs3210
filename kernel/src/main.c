@@ -21,6 +21,35 @@ extern char end[]; // first address after kernel loaded from ELF file
 int
 main(void)
 {
+  // 0x8010438e points to kvmalloc
+  const uint e820_len = *(uint *) 0x8000;
+  e820_record* e820_records = (e820_record *) 0x8004; // array of records
+  uint PHYSTOP = 0;
+  int goodframe = -1;
+  // unsigned long long base = 0;
+  // unsigned long long offset = 0;
+  for (int i = 0; i < e820_len; i++) {
+    e820_record* curr = &e820_records[i];
+    if (curr->type_field == 1)
+      goodframe = i;
+  }
+  PHYSTOP = e820_records[goodframe].phys_addr + e820_records[goodframe].frame_length;
+
+  // e820_record* curr = &e820_records[e820_len-1];
+  // PHYSTOP = curr->phys_addr + curr->length;
+  // for (int i = 0; i < e820_len; i++) {
+  //   e820_record* curr = &e820_records[i];
+  //   if (curr[i].type_field == 1) {
+  //     if (base < curr[i].phys_addr) {
+  //       base = curr[i].phys_addr;
+  //       offset = curr[i].length;
+  //     }
+  //   }
+  //    PHYSTOP += curr[i].length; // Adds the length of the memory frames found.
+  //   cprintf("Length of frame %d: %d\n", i, curr[i].length);
+  // }
+  // PHYSTOP = base + offset;
+
   kinit1(end, P2V(4*1024*1024)); // phys page allocator
   kvmalloc(PHYSTOP); // kernel page table
   mpinit();        // detect other processors
