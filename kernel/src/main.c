@@ -21,37 +21,23 @@ extern char end[]; // first address after kernel loaded from ELF file
 int
 main(void)
 {
-  // 0x8010438e points to kvmalloc
+  // loops through the e820 records and finds the highest "goodframe" (unused frame of physical memory)
   const uint e820_len = *(uint *) 0x8000;
   e820_record* e820_records = (e820_record *) 0x8004; // array of records
-  uint PHYSTOP = 0;
+  uint phys_top_var = 0;
   int goodframe = -1;
-  // unsigned long long base = 0;
-  // unsigned long long offset = 0;
   for (int i = 0; i < e820_len; i++) {
     e820_record* curr = &e820_records[i];
     if (curr->type_field == 1)
       goodframe = i;
   }
-  PHYSTOP = e820_records[goodframe].phys_addr + e820_records[goodframe].frame_length;
-
-  // e820_record* curr = &e820_records[e820_len-1];
-  // PHYSTOP = curr->phys_addr + curr->length;
-  // for (int i = 0; i < e820_len; i++) {
-  //   e820_record* curr = &e820_records[i];
-  //   if (curr[i].type_field == 1) {
-  //     if (base < curr[i].phys_addr) {
-  //       base = curr[i].phys_addr;
-  //       offset = curr[i].length;
-  //     }
-  //   }
-  //    PHYSTOP += curr[i].length; // Adds the length of the memory frames found.
-  //   cprintf("Length of frame %d: %d\n", i, curr[i].length);
-  // }
-  // PHYSTOP = base + offset;
+  phys_top_var = e820_records[goodframe].phys_addr + e820_records[goodframe].frame_length; // Sets phys_top_var to highest memory point (phys_addr + frame_length)
+  if (phys_top_var > DEVSPACE-KERNBASE) { // upper limit for phys_top_var to not break.
+    phys_top_var = DEVSPACE-KERNBASE-1; // Upper limit is DEVSPACE-KERNBASE since DEVSPACE can't be written into, and it's in VM. Set phys_top_var to DEVSPACE-KERNBASE-1 to prevent overflowing any issues when switching from physical to virtual addressing.
+  }
 
   kinit1(end, P2V(4*1024*1024)); // phys page allocator
-  kvmalloc(PHYSTOP); // kernel page table
+  kvmalloc(phys_top_var); // kernel page table
   mpinit();        // detect other processors
   lapicinit();     // interrupt controller
   seginit();       // segment descriptors
@@ -65,7 +51,7 @@ main(void)
   fileinit();      // file table
   ideinit();       // disk 
   startothers();   // start other processors
-  kinit2(P2V(4*1024*1024), P2V(PHYSTOP), PHYSTOP); // must come after startothers()
+  kinit2(P2V(4*1024*1024), P2V(phys_top_var), phys_top_var); // must come after startothers()
   userinit();      // first user process
   mpmain();        // finish this processor's setup
 }

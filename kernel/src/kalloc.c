@@ -69,6 +69,12 @@ kfree(char *v)
 
   if((uint)v % PGSIZE || v < end || (kmem.phys_top && V2P(v) >= kmem.phys_top))
   {
+    // Causes for panic: Page tht v points to doesn't start in a good place (PGSIZE)
+    // v  end (First address loaded by kernel) THIS IS THE ISSUE!
+    // If we have phystop and the pointer of the page is higher than phystop
+    
+    // Page is trying to start inside of the kernel
+
     panic("kfree");
   }
 

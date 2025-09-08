@@ -21,6 +21,6 @@ set(user_SOURCES
 
   # Common utility programs
   src/ls.c
-  src/backtrace.c
+  src/backtraceTest.c
   )
 

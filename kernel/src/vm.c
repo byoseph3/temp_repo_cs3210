@@ -129,7 +129,7 @@ setupkvm()
   if((pgdir = (pde_t*)kalloc()) == 0)
     return 0;
   memset(pgdir, 0, PGSIZE);
-  if (P2V(kmap[2].phys_end) > (void*)DEVSPACE)
+  if (P2V(kmap[2].phys_end) > (void*)DEVSPACE) // DEVSPACE?
   {
     panic("PHYSTOP too high");
   }
@@ -283,7 +283,8 @@ deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)
       pa = PTE_ADDR(*pte);
       if(pa == 0)
         panic("kfree");
-      char *v = P2V(pa);
+      char *v = P2V(pa); // perhaps the error is that the page table entry address is at 0x80000000?
+      // Yes, this overflows. Need to find a way around the overflow
       kfree(v);
       *pte = 0;
     }

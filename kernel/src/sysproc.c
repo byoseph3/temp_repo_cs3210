@@ -45,6 +45,7 @@ sys_kill(void)
 int
 sys_getpid(void)
 {
+  backtrace();
   return myproc()->pid;
 }
 
