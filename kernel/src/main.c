@@ -24,7 +24,7 @@ main(void)
   // loops through the e820 records and finds the highest "goodframe" (unused frame of physical memory)
   const uint e820_len = *(uint *) 0x8000;
   e820_record* e820_records = (e820_record *) 0x8004; // array of records
-  uint phys_top_var = 0;
+  long long phys_top_var = 0;
   int goodframe = -1;
   for (int i = 0; i < e820_len; i++) {
     e820_record* curr = &e820_records[i];
@@ -51,7 +51,7 @@ main(void)
   fileinit();      // file table
   ideinit();       // disk 
   startothers();   // start other processors
-  kinit2(P2V(4*1024*1024), P2V(phys_top_var), phys_top_var); // must come after startothers()
+  kinit2(P2V(4*1024*1024), P2V((uint) phys_top_var), phys_top_var); // must come after startothers()
   userinit();      // first user process
   mpmain();        // finish this processor's setup
 }
