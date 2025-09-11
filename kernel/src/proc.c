@@ -178,7 +178,7 @@ growproc(int n)
 // Sets up stack to return as if from system call.
 // Caller must set state of returned proc to RUNNABLE.
 int
-fork(void)
+fork(void) // This is the function that we will need to edit.
 {
   int i, pid;
   struct proc *np;
@@ -189,8 +189,9 @@ fork(void)
     return -1;
   }
 
+  // Code here needs to go.
   // Copy process state from proc.
-  if((np->pgdir = copyuvm(curproc->pgdir, curproc->sz)) == 0){
+  if((np->pgdir = copyuvm(curproc->pgdir, curproc->sz)) == 0){ // First implementation, just replace copyuvm with curproc->pgdir?
     kfree(np->kstack);
     np->kstack = 0;
     np->state = UNUSED;

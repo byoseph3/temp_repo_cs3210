@@ -14,14 +14,14 @@ extern char end[]; // first address after kernel loaded from ELF file
                    // defined by the kernel linker script in kernel.ld
 
 struct run {
-  struct run *next;
+  struct run *next; // This is for the freelist
 };
 
 struct {
   struct spinlock lock;
   int use_lock;
   struct run *freelist;
-} kmem;
+} kmem; // Initialized?
 
 // Initialization happens in two phases.
 // 1. main() calls kinit1() while still using entrypgdir to place just
@@ -88,7 +88,7 @@ kalloc(void)
     acquire(&kmem.lock);
   r = kmem.freelist;
   if(r)
-    kmem.freelist = r->next;
+    kmem.freelist = r->next; // Pointing to the next thing in the freelist.
   if(kmem.use_lock)
     release(&kmem.lock);
   return (char*)r;
